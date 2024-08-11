@@ -20,6 +20,7 @@ string func() {
     return "Non mocked.";
 }
 
+
 TEST(HelloWorld, First) {
     EXPECT_CALL(*MOCKER(func), MOCK_FUNCTION())
         .Times(Exactly(1))

@@ -40,12 +40,12 @@ struct RuntimePatcher {
     template < typename F1, typename F2 >
     static int GraftFunction(F1 address, F2 destination, std::vector<char>& binary_backup) {
         void* function = reinterpret_cast<void*>((std::size_t&)address);
-        if (0 != RuntimePatcherImpl::UnprotectMemoryForOnePage(function)) {
-            std::abort();
-        } else {
+        // if (0 != RuntimePatcherImpl::UnprotectMemoryForOnePage(function)) {
+        //     std::abort();
+        // } else {
             // For mock std::abort, this need not after the 'if'.
             return RuntimePatcherImpl::SetJump(function, reinterpret_cast<void*>((std::size_t&)destination), binary_backup);
-        }
+        //}
     }
 
     template < typename F >

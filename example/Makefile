@@ -1,16 +1,18 @@
-TMPDIR=/Volumes/RaidRamDisk/
+TMPDIR=./out
 PROJECT_ROOT=..
+GMOCK_PATH=D:/qigao/googletest
 GMOCK_LIB=$(PROJECT_ROOT)/libgmock.a $(PROJECT_ROOT)/libgmock_main.a $(PROJECT_ROOT)/libgtest.a
-GMOCK_INCLUDE=-I$(GMOCK_PATH)/include -I$(GMOCK_PATH)/gtest/include -I$(PROJECT_ROOT)
-CPP11_FLAGS=-g -O0 -std=c++11 -fno-inline -falign-functions=32
+# GMOCK_INCLUDE=-I$(GMOCK_PATH)/include -I$(GMOCK_PATH)/gtest/include -I$(PROJECT_ROOT)
+GMOCK_INCLUDE=-I$(GMOCK_PATH)/googlemock/include -I$(GMOCK_PATH)/googletest/include -I$(PROJECT_ROOT)
+CPP11_FLAGS=-g -O0 -std=c++14 -fno-inline -falign-functions=32
 SRC=$(wildcard *.cpp)
 TARGETS=$(patsubst %.cpp, %, $(SRC))
-TARGETS_PATH=$(patsubst %.cpp, $(TMPDIR)/%.out, $(SRC))
+TARGETS_PATH=$(patsubst %.cpp, $(TMPDIR)/%.exe, $(SRC))
 RECENT=test_anonymous_mocker
-RECENT_PATH=$(patsubst %, $(TMPDIR)/%.out, $(RECENT))
+RECENT_PATH=$(patsubst %, $(TMPDIR)/%.exe, $(RECENT))
 # Example
 %: %.cpp
-	g++ $(CPP11_FLAGS) $^ $(GMOCK_INCLUDE) $(GMOCK_LIB) -o $(TMPDIR)/$@.out
+	g++ $(CPP11_FLAGS) $^ $(GMOCK_INCLUDE) $(GMOCK_LIB) -o $(TMPDIR)/$@.exe
 # Default
 all: $(TARGETS)
 # Recent
